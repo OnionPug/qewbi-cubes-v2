@@ -1,0 +1,42 @@
+[gd_scene load_steps=2 format=3 uid="uid://chla1aomwadea"]
+
+[sub_resource type="GDScript" id="GDScript_tai80"]
+script/source = "extends Node2D
+
+
+func _on_timer_timeout() -> void:
+	queue_free()
+"
+
+[node name="BeamPart" type="Node2D"]
+script = SubResource("GDScript_tai80")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -17.0
+offset_right = 10.0
+offset_bottom = 17.0
+grow_vertical = 2
+scale = Vector2(1.00691, 1)
+color = Color(0.176471, 1, 1, 1)
+
+[node name="ColorRect2" type="ColorRect" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_top = -8.0
+offset_right = 25.0
+offset_bottom = 33.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.402763, 0.439)
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.5
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

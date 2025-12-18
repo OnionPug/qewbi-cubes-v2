@@ -1,0 +1,52 @@
+[gd_scene load_steps=2 format=3 uid="uid://d24ydit2xxbyv"]
+
+[ext_resource type="Script" uid="uid://c23a4rb5j52fj" path="res://Scripts/UI/debug.gd" id="1_5sp44"]
+
+[node name="Debug" type="CenterContainer"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -40.0
+offset_right = 50.0
+grow_vertical = 0
+script = ExtResource("1_5sp44")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer/HBoxContainer"]
+layout_mode = 2
+text = "Debug"
+
+[node name="Normal" type="Button" parent="PanelContainer/HBoxContainer"]
+layout_mode = 2
+text = "(1)
+Normal"
+
+[node name="Flat" type="Button" parent="PanelContainer/HBoxContainer"]
+layout_mode = 2
+text = "(2)
+Flat"
+
+[node name="Headless" type="Button" parent="PanelContainer/HBoxContainer"]
+layout_mode = 2
+text = "(3)
+Headless"
+
+[node name="Freeze" type="Button" parent="PanelContainer/HBoxContainer"]
+layout_mode = 2
+text = "(4)
+Freeze"
+
+[node name="Melt" type="Button" parent="PanelContainer/HBoxContainer"]
+layout_mode = 2
+text = "(5)
+Melt"
+
+[node name="Dizzy" type="Button" parent="PanelContainer/HBoxContainer"]
+layout_mode = 2
+text = "(0)
+Dizzy"

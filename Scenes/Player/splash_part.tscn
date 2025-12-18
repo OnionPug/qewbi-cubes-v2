@@ -1,0 +1,33 @@
+[gd_scene load_steps=4 format=3 uid="uid://cdttfjw4771tj"]
+
+[ext_resource type="Texture2D" uid="uid://bf31ergba1ima" path="res://Assets/Circle.png" id="1_rwuhh"]
+[ext_resource type="Script" uid="uid://c6dm3rg2g5slv" path="res://Scripts/Player/splash_part.gd" id="1_yeapm"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_rwuhh"]
+radius = 59.1921
+
+[node name="SplashPart" type="Area2D"]
+scale = Vector2(0.549651, 1.30104)
+collision_layer = 2
+collision_mask = 144
+script = ExtResource("1_yeapm")
+
+[node name="Circle" type="Sprite2D" parent="."]
+modulate = Color(1, 0.609, 0.31, 1)
+position = Vector2(43.0105, 0.0899601)
+rotation = -3.14159
+scale = Vector2(0.0840048, 0.0411913)
+texture = ExtResource("1_rwuhh")
+
+[node name="Circle2" type="Sprite2D" parent="."]
+modulate = Color(1, 0.985333, 0.56, 1)
+position = Vector2(48, 0)
+scale = Vector2(0.0708371, 0.0170319)
+texture = ExtResource("1_rwuhh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(43.6641, 0)
+scale = Vector2(0.676778, 0.312911)
+shape = SubResource("CircleShape2D_rwuhh")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

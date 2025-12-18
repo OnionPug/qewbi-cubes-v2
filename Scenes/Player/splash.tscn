@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://bmslilsc2gwmr"]
+
+[ext_resource type="Script" uid="uid://dnrrpj8dssxex" path="res://Scripts/Player/splash.gd" id="1_7ik8c"]
+[ext_resource type="Texture2D" uid="uid://bf31ergba1ima" path="res://Assets/Circle.png" id="2_gwt2i"]
+
+[node name="Splash" type="Node2D"]
+script = ExtResource("1_7ik8c")
+
+[node name="Circle" type="Sprite2D" parent="."]
+modulate = Color(1, 0.23, 0.4995, 0.0705882)
+position = Vector2(-134, 1.90735e-06)
+scale = Vector2(0.179804, 0.179804)
+texture = ExtResource("2_gwt2i")

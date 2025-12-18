@@ -1,0 +1,56 @@
+[gd_scene load_steps=9 format=3 uid="uid://f3ibfet8bre0"]
+
+[ext_resource type="PackedScene" uid="uid://d26qff60djt7c" path="res://Scenes/Player/player.tscn" id="1_80nbo"]
+[ext_resource type="PackedScene" uid="uid://bu16but82xbyu" path="res://Scenes/Worlds/apartment.tscn" id="1_j5wjh"]
+[ext_resource type="Script" uid="uid://d2j3cis21yw7e" path="res://Scripts/UI/ui.gd" id="2_e2o6t"]
+[ext_resource type="PackedScene" uid="uid://6mf2bl4k454k" path="res://Scenes/UI/menu.tscn" id="3_feb5d"]
+[ext_resource type="Script" uid="uid://v6hwxut83j8e" path="res://Scripts/UI/healthbar.gd" id="3_ryrav"]
+[ext_resource type="Script" uid="uid://bt7nspo24utyc" path="res://Scripts/UI/manabar.gd" id="4_eow3j"]
+[ext_resource type="PackedScene" uid="uid://c64o5n1vh8y4h" path="res://Scenes/UI/settings.tscn" id="4_fc0e3"]
+[ext_resource type="PackedScene" uid="uid://d24ydit2xxbyv" path="res://Scenes/UI/debug.tscn" id="5_7jktm"]
+
+[node name="Game" type="Node2D"]
+y_sort_enabled = true
+
+[node name="World" type="Node2D" parent="."]
+z_index = -1
+y_sort_enabled = true
+
+[node name="Apartment" parent="World" instance=ExtResource("1_j5wjh")]
+y_sort_enabled = true
+
+[node name="Player" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="Player" parent="Player" instance=ExtResource("1_80nbo")]
+position = Vector2(589, 364)
+
+[node name="Camera" type="Camera2D" parent="Player/Player"]
+position = Vector2(0, -80)
+position_smoothing_enabled = true
+
+[node name="UI" type="CanvasLayer" parent="."]
+script = ExtResource("2_e2o6t")
+
+[node name="Healthbar" type="ProgressBar" parent="UI"]
+offset_right = 363.0
+offset_bottom = 27.0
+script = ExtResource("3_ryrav")
+
+[node name="Manabar" type="ProgressBar" parent="UI"]
+offset_top = 37.0
+offset_right = 264.0
+offset_bottom = 64.0
+script = ExtResource("4_eow3j")
+
+[node name="Menu" parent="UI" instance=ExtResource("3_feb5d")]
+visible = false
+offset_top = 76.0
+offset_bottom = 239.0
+scale = Vector2(1.56847, 1.56847)
+
+[node name="Settings" parent="UI" instance=ExtResource("4_fc0e3")]
+visible = false
+
+[node name="Debug" parent="UI" instance=ExtResource("5_7jktm")]
+visible = false

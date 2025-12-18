@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://cy11ltxw47psk"]
+
+[ext_resource type="Script" uid="uid://npdrtxm66een" path="res://Scripts/Worlds/effect_aura.gd" id="1_ocetw"]
+[ext_resource type="Texture2D" uid="uid://bf31ergba1ima" path="res://Assets/Circle.png" id="2_ipq8m"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ipq8m"]
+
+[node name="Effect Aura" type="Area2D"]
+script = ExtResource("1_ocetw")
+type = "flat"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(7.72857, 7.72857)
+shape = SubResource("CircleShape2D_ipq8m")
+
+[node name="Circle" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.458824)
+position = Vector2(-1.90735e-06, 4.76837e-07)
+scale = Vector2(0.146955, 0.146955)
+texture = ExtResource("2_ipq8m")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

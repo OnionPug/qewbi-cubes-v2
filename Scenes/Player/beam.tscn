@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://lik644hyq3q3"]
+
+[ext_resource type="Script" uid="uid://bniqekh8vinau" path="res://Scripts/Player/beam.gd" id="1_tc1gd"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_88vq1"]
+
+[node name="Beam" type="Area2D"]
+collision_layer = 2
+collision_mask = 144
+script = ExtResource("1_tc1gd")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_88vq1")
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+rotation = -1.57079
+target_position = Vector2(0, 160)
+collision_mask = 128
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

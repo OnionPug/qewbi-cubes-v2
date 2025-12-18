@@ -1,0 +1,57 @@
+[gd_scene load_steps=6 format=3 uid="uid://bpbem5k6febai"]
+
+[ext_resource type="Script" uid="uid://c1srosk4mewiy" path="res://Scripts/Enemy/cube.gd" id="1_c4tj1"]
+[ext_resource type="AudioStream" uid="uid://m87dleq28ppy" path="res://Assets/audio/Stone.mp3" id="2_nmerj"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2lc5q"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_c4tj1"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_c4tj1"]
+radius = 7.25672
+
+[node name="Cube" type="CharacterBody2D"]
+z_index = 1
+collision_layer = 528
+collision_mask = 128
+script = ExtResource("1_c4tj1")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -40.0
+offset_top = -40.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(2.00382, 2.00382)
+color = Color(0.544, 0.6324, 0.68, 1)
+
+[node name="CollisionBox" type="CollisionShape2D" parent="."]
+scale = Vector2(3.80686, 3.80686)
+shape = SubResource("RectangleShape2D_2lc5q")
+
+[node name="Hurtbox" type="Area2D" parent="."]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+scale = Vector2(4.59485, 4.59485)
+shape = SubResource("RectangleShape2D_c4tj1")
+debug_color = Color(0.7, 0, 0, 0)
+
+[node name="Detection" type="Area2D" parent="."]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Detection"]
+scale = Vector2(44.0971, 44.0971)
+shape = SubResource("CircleShape2D_c4tj1")
+
+[node name="StoneSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_nmerj")
+autoplay = true
+
+[connection signal="body_entered" from="Hurtbox" to="." method="_on_hurtbox_body_entered"]
+[connection signal="body_entered" from="Detection" to="." method="_on_detection_body_entered"]
+[connection signal="finished" from="StoneSound" to="." method="_on_stone_sound_finished"]

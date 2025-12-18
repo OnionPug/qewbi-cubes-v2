@@ -1,0 +1,111 @@
+[gd_scene load_steps=17 format=3 uid="uid://cwvqoyhuvsjnq"]
+
+[ext_resource type="Texture2D" uid="uid://cumixbrbgcqg7" path="res://Assets/Qewbi Sprites/Qewbi Headless Spritesheet.png" id="1_ghxri"]
+[ext_resource type="Script" uid="uid://dxq6hwu3a3j8b" path="res://Scripts/Player/player_head.gd" id="1_ot1q7"]
+[ext_resource type="Texture2D" uid="uid://c8ommp5wnccsg" path="res://Assets/Qewbi Sprites/Qewbi Flat Spritesheet.png" id="2_o2odu"]
+[ext_resource type="Script" uid="uid://byu72io8yyvvb" path="res://Scripts/States/State Machine.gd" id="4_buehf"]
+[ext_resource type="Script" uid="uid://dl86cy5gc1dox" path="res://Scripts/States/head_normal.gd" id="4_n353l"]
+[ext_resource type="Script" uid="uid://btkl0a4nwjliq" path="res://Scripts/Player/head_flat.gd" id="6_3jswa"]
+[ext_resource type="Script" uid="uid://d3p405e6fxskq" path="res://Scripts/States/head_freeze.gd" id="7_brchy"]
+[ext_resource type="Script" uid="uid://dgbv1c01hnoig" path="res://Scenes/Player/head_melt.gd" id="8_qk5uy"]
+[ext_resource type="Script" uid="uid://dck02grwk0sws" path="res://Scenes/Player/head_dizzy.gd" id="9_r7kcw"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o2odu"]
+atlas = ExtResource("1_ghxri")
+region = Rect2(1920, 640, 640, 640)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ot1q7"]
+atlas = ExtResource("2_o2odu")
+region = Rect2(1920, 0, 640, 640)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_brchy"]
+atlas = ExtResource("1_ghxri")
+region = Rect2(2560, 0, 640, 640)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_11ssg"]
+atlas = ExtResource("1_ghxri")
+region = Rect2(2560, 640, 640, 640)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ot1q7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o2odu")
+}],
+"loop": true,
+"name": &"dizzy",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ot1q7")
+}],
+"loop": true,
+"name": &"flat",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_brchy")
+}],
+"loop": true,
+"name": &"freeze",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_11ssg")
+}],
+"loop": true,
+"name": &"melt",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_o2odu"]
+radius = 46.0435
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_buehf"]
+radius = 53.0377
+
+[node name="PlayerHead" type="CharacterBody2D"]
+collision_mask = 57216
+script = ExtResource("1_ot1q7")
+
+[node name="Head" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.35, 0.35)
+sprite_frames = SubResource("SpriteFrames_ot1q7")
+animation = &"dizzy"
+autoplay = "dizzy"
+
+[node name="CollisionBox" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_o2odu")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 2
+
+[node name="Hurtbox" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_buehf")
+debug_color = Color(1, 0, 0.133333, 0)
+
+[node name="State Machine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("4_buehf")
+initial_state = NodePath("Normal")
+
+[node name="Normal" type="Node" parent="State Machine"]
+script = ExtResource("4_n353l")
+speed = 500
+
+[node name="Flat" type="Node" parent="State Machine"]
+script = ExtResource("6_3jswa")
+
+[node name="Freeze" type="Node" parent="State Machine"]
+script = ExtResource("7_brchy")
+
+[node name="Melt" type="Node" parent="State Machine"]
+script = ExtResource("8_qk5uy")
+
+[node name="Dizzy" type="Node" parent="State Machine"]
+script = ExtResource("9_r7kcw")
+
+[connection signal="body_entered" from="Area2D" to="State Machine/Normal" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Area2D" to="State Machine/Flat" method="_on_area_2d_body_entered"]
