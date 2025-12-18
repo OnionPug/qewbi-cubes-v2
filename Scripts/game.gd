@@ -1,7 +1,7 @@
 extends Node2D
 
-
-func _ready() -> void:
+#figure out a way to load new player textures
+'func _ready() -> void:
 	var exe_path := OS.get_executable_path().get_base_dir()
 	print(exe_path+"/Sprites")
 	load_external_texture(exe_path+"/Sprites")
@@ -20,3 +20,4 @@ func load_external_texture(path: String) -> Texture2D:
 
 	var texture := ImageTexture.create_from_image(image)
 	return texture
+'

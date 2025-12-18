@@ -17,6 +17,9 @@ func update(_delta: float):
 func physics_update(_delta: float):
 	pass
 
+func fire(_input):
+	pass
+
 func set_state(state_name):
 	#base code - only works if this function is not declared elsewhere
 	state_transition.emit(self, state_name)

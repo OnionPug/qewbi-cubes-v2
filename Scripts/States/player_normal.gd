@@ -46,20 +46,31 @@ func physics_update(delta):
 	owner.move_and_slide()
 	
 	
-	
+func fire(input):
 	#shooting
-	if $"../../Cooldown".time_left == 0 and Input.is_action_pressed("mouse1"):
+	if $"../../Cooldown".time_left == 0 and input:
 		$"../../Cooldown".start(0.5)
 		if owner.mana > 0:
 			attack()
 			owner.mana -= 10
-	elif Input.is_action_just_released("mouse1"):
+	elif not input:
 			$"../../Regen".start(1)
-	
-	
 
 func attack():
 	var bullet = BULLET.instantiate()
 	bullet.global_position = $"../../Pivot/FiringPoint".global_position
 	bullet.rotation = $"../../Pivot".rotation
 	get_node("/root/Game/Player").add_child(bullet)
+
+func set_state(state_name):
+	if state_name == "normal":
+		owner.health = 5
+		owner.mana = 100
+	elif state_name == "dizzy":
+		$"../../Head".play("dizzy")
+		$"../../Body".play("dizzy")
+		state_transition.emit(self, state_name)
+	else:
+		state_transition.emit(self, state_name)
+	
+	

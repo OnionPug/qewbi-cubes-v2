@@ -49,9 +49,15 @@ visible = false
 offset_top = 76.0
 offset_bottom = 239.0
 scale = Vector2(1.56847, 1.56847)
+mouse_filter = 0
 
 [node name="Settings" parent="UI" instance=ExtResource("4_fc0e3")]
 visible = false
+mouse_filter = 0
 
 [node name="Debug" parent="UI" instance=ExtResource("5_7jktm")]
 visible = false
+mouse_filter = 0
+mouse_default_cursor_shape = 3
+
+[node name="Dialogue" type="Node" parent="UI"]

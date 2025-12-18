@@ -1,5 +1,8 @@
 extends State
 
 func enter():
-	$"../../Head".play("dizzy")
-	$"../../Body".play("dizzy")
+	owner.can_attack = false
+	
+
+func exit():
+	owner.can_attack = true

@@ -3,7 +3,6 @@ extends State
 const SPLASH = preload("res://Scenes/Player/splash.tscn")
 var speedmult : int = 2
 var direction : Vector2
-var can_attack = true
 var struggle_power = 1
 var struggle_threshold = 200
 var struggle = 0
@@ -21,7 +20,6 @@ func enter():
 
 func exit():
 	$"../../Pivot/AimPointer".visible = false
-	can_attack = true
 	if escalation: deescalate()
 	struggle = 0
 
@@ -37,19 +35,6 @@ func deescalate():
 	escalation = false
 	speedmult = 2
 
-
-func update(_delta):
-	#shooting
-	if can_attack == false:
-		return
-	if $"../../Cooldown".time_left == 0 and Input.is_action_pressed("mouse1"):
-		$"../../Cooldown".start(0.2)
-		if owner.mana > 0:
-			attack() #emerald splash!!!
-			owner.mana -= 20
-	elif Input.is_action_just_released("mouse1"):
-			$"../../Regen".start(0.2)
-	pass
 	
 
 func physics_update(delta):
@@ -88,6 +73,17 @@ func physics_update(delta):
 			set_state("headless")
 		else:
 			set_state("normal")
+
+func fire(input):
+		#shooting
+	if $"../../Cooldown".time_left == 0 and input:
+		$"../../Cooldown".start(0.2)
+		if owner.mana > 0:
+			attack() #emerald splash!!!
+			owner.mana -= 20
+	elif not input:
+			$"../../Regen".start(0.2)
+
 	
 func attack():
 	owner.velocity *= 0
@@ -106,5 +102,8 @@ func set_state(state_name):
 			state_transition.emit(self, "headless")
 		else:
 			state_transition.emit(self, "normal")
+	elif state_name == "dizzy":
+		state_transition.emit(self, state_name)
+		#dizzy animation for melt
 	else:
 		state_transition.emit(self, state_name)

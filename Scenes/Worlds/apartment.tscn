@@ -42,6 +42,7 @@ func toggle(node : Node2D, mode : bool):
 
 func _on_cube_death() -> void:
 	toggle($Bossfight/FlatGate2, false)
+	
 "
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8alme"]
@@ -511,4 +512,4 @@ speed = 5
 health = 5
 
 [connection signal="body_entered" from="Bossfight/Entry" to="." method="_on_entry_body_entered"]
-[connection signal="tree_exited" from="Bossfight/Cube" to="." method="_on_cube_death"]
+[connection signal="tree_exiting" from="Bossfight/Cube" to="." method="_on_cube_death"]

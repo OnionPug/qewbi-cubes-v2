@@ -92,5 +92,8 @@ func deescalate():
 func set_state(state_name):
 	if state_name == "flat":
 		escalate()
+	elif state_name == "dizzy":
+		state_transition.emit(self, state_name, false)
+		$"../../Head".play("dizzy_flat")
 	else:
 		state_transition.emit(self, state_name)

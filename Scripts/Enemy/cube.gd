@@ -43,7 +43,8 @@ func _physics_process(delta: float) -> void:
 	var collision_info = move_and_collide(velocity)
 	if collision_info:
 		velocity = velocity.bounce(collision_info.get_normal())
-		accel = false
+		if velocity.normalized().dot(collision_info.get_normal()) > 0.3:
+			accel = false
 	
 	$StoneSound.volume_linear = velocity.length()*0.01
 	

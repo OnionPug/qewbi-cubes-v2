@@ -2,7 +2,6 @@ extends State
 
 const BEAM = preload("res://Scenes/Player/beam.tscn")
 var knockback = 250
-var can_attack = true
 var struggle_power = 10
 var struggle_threshold = 100
 var struggle = 0:
@@ -20,7 +19,6 @@ func enter():
 
 func exit():
 	$"../../Pivot/AimPointer".visible = false
-	can_attack = true
 	struggle = 0
 	if escalation: deescalate()
 
@@ -53,24 +51,20 @@ func physics_update(_delta):
 			set_state("headless")
 		else:
 			set_state("normal")
-	
-	
-	#shooting
-	
-	if can_attack == false:
-		return
-	
-	if $"../../Cooldown".time_left == 0 and Input.is_action_pressed("mouse1"):
+
+#give Freeze a sniper weapon with high knockback
+#schmoovement, baybee
+
+func fire(input):
+	if $"../../Cooldown".time_left == 0 and input:
 		$"../../Cooldown".start(1.5)
 		if owner.mana > 0:
 			attack() #beam attack!!!!!
 			owner.mana -= 40
 			struggle -= 20
-	elif Input.is_action_just_released("mouse1"):
+	elif not input:
 			$"../../Regen".start(0.2)
 
-#give Freeze a sniper weapon with high knockback
-#schmoovement, baybee
 func attack():
 	owner.velocity = Vector2(-1, 0).rotated($"../../Pivot".rotation) * knockback
 	var beam = BEAM.instantiate()
@@ -86,5 +80,8 @@ func set_state(state_name):
 			state_transition.emit(self, "headless")
 		else:
 			state_transition.emit(self, "normal")
+	elif state_name == "dizzy":
+		$"../../Head".play("dizzy_freeze")
+		state_transition.emit(self, state_name)
 	else: 
 		state_transition.emit(self, state_name)
