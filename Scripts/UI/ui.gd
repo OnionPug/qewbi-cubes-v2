@@ -25,6 +25,7 @@ func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("ui_cancel"):
 		if $Menu.visible:
 			$Settings.visible = false
+			$Debug.visible = false
 		$Menu.visible = not $Menu.visible
 	
 	if Input.is_action_just_pressed("ui_plus"):

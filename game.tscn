@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://f3ibfet8bre0"]
+[gd_scene load_steps=11 format=3 uid="uid://f3ibfet8bre0"]
 
 [ext_resource type="PackedScene" uid="uid://d26qff60djt7c" path="res://Scenes/Player/player.tscn" id="1_80nbo"]
 [ext_resource type="PackedScene" uid="uid://bu16but82xbyu" path="res://Scenes/Worlds/apartment.tscn" id="1_j5wjh"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://bt7nspo24utyc" path="res://Scripts/UI/manabar.gd" id="4_eow3j"]
 [ext_resource type="PackedScene" uid="uid://c64o5n1vh8y4h" path="res://Scenes/UI/settings.tscn" id="4_fc0e3"]
 [ext_resource type="PackedScene" uid="uid://d24ydit2xxbyv" path="res://Scenes/UI/debug.tscn" id="5_7jktm"]
+[ext_resource type="PackedScene" uid="uid://71loe7idyb5l" path="res://Scenes/UI/dialogue_player.tscn" id="5_hve3p"]
 
 [node name="Game" type="Node2D"]
 y_sort_enabled = true
@@ -32,6 +33,8 @@ position_smoothing_enabled = true
 
 [node name="UI" type="CanvasLayer" parent="."]
 script = ExtResource("2_e2o6t")
+
+[node name="DialoguePlayer" parent="UI" instance=ExtResource("5_hve3p")]
 
 [node name="Healthbar" type="ProgressBar" parent="UI"]
 offset_right = 363.0
@@ -59,5 +62,3 @@ mouse_filter = 0
 visible = false
 mouse_filter = 0
 mouse_default_cursor_shape = 3
-
-[node name="Dialogue" type="Node" parent="UI"]

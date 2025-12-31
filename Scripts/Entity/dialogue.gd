@@ -1,23 +1,33 @@
 extends Area2D
-@export var text : String
+class_name Dialogue
 
-func _ready() -> void:
-	if text: 
-		$CanvasLayer/Label.text = ''
-		var textsplit = text.split(":n")
-		for i in textsplit:
-			$CanvasLayer/Label.text += i + "\n"
-	$Fade.speed_scale = randf_range(0.9,1.1)
+signal dialogue_active
 
-func _on_body_entered(body: Node2D) -> void:
-	$Marker.modulate = Color(1,1,1,0.4)
-	$CanvasLayer.set_deferred("visible", true)
-	$Fade.play("FadeIn")
+#This shit sucks to code, i'm benching it
+
+#code for the dialogue markers and npcs, to be sent up to the UI
+@export var import_dialogue : Array[String]
+var dialogue_chain : Array[textbox]
+var num: int = 0
+class textbox:
+	var char_name : String
+	var text : String
+	var autoplay : bool
+	var delay : int
+	
+	func _init(a:String = "", b:String = "", c:bool = false, d:int = 1) -> void:
+		char_name = a
+		text = b
+		autoplay = c
+		delay = d
 
 
-
-func _on_body_exited(body: Node2D) -> void:
-	$Marker.modulate = Color(1,1,1,1)
-	$Fade.play("FadeOut")
-	await get_tree().create_timer(0.5).timeout
-	$CanvasLayer.set_deferred("visible", false)
+func _ready():
+	for unsplit in import_dialogue:
+		var split = unsplit.split(":", true)
+		split.resize(4)
+		dialogue_chain.append(textbox.new(split[0], split[1], split[2] == "true", split[3].to_int()))
+	'for i in dialogue_chain:
+		print(i.char_name)
+		print(i.text)'
+		

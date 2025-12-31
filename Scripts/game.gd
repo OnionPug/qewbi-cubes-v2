@@ -1,5 +1,31 @@
 extends Node2D
 
+
+
+#make signals to connect the world & player to the UI
+
+#recieve signals from marker - what dialogue to play
+#DONT DO THIS, ITS NOT WORTH IT - recieve signals from world - what characters to render
+func _ready():
+	connect_world()
+
+func play_dialogue():
+	pass
+
+func connect_world():
+	$World.get_child(0).tree_exited.connect(connect_world)
+	if get_tree() == null:
+		return
+	for area in get_tree().get_nodes_in_group("Dialogue"):
+		area.dialogue_active.connect($UI/DialoguePlayer.play_dialogue)
+		print(area)
+
+
+
+
+
+
+
 #figure out a way to load new player textures
 'func _ready() -> void:
 	var exe_path := OS.get_executable_path().get_base_dir()

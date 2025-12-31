@@ -75,6 +75,19 @@ script = ExtResource("1_vr4q3")
 time = 5.0
 kill_qewbi = true
 
+[node name="Shadow" type="Sprite2D" parent="."]
+modulate = Color(0.2, 0.2, 0.2, 0.356863)
+z_index = -1
+position = Vector2(1, -12)
+scale = Vector2(0.175612, -0.0638824)
+texture = ExtResource("3_jcos8")
+
+[node name="Piston" type="Sprite2D" parent="."]
+rotation = -3.14159
+scale = Vector2(0.35639, 0.35639)
+texture = ExtResource("1_6hwcw")
+offset = Vector2(0, 650)
+
 [node name="CollisionBox" type="CollisionShape2D" parent="."]
 position = Vector2(7.62939e-06, -26)
 scale = Vector2(9.41426, 9.03305)
@@ -90,19 +103,6 @@ position = Vector2(0.189649, -1.77512)
 scale = Vector2(0.959731, 0.781261)
 shape = SubResource("RectangleShape2D_3evi0")
 debug_color = Color(0.97, 0, 0.420333, 0)
-
-[node name="Shadow" type="Sprite2D" parent="."]
-modulate = Color(0.2, 0.2, 0.2, 0.356863)
-z_index = -1
-position = Vector2(1, -12)
-scale = Vector2(0.175612, -0.0638824)
-texture = ExtResource("3_jcos8")
-
-[node name="Piston" type="Sprite2D" parent="."]
-rotation = -3.14159
-scale = Vector2(0.35639, 0.35639)
-texture = ExtResource("1_6hwcw")
-offset = Vector2(0, 650)
 
 [node name="Slam" type="AnimationPlayer" parent="."]
 libraries = {

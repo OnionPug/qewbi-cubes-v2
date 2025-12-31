@@ -28,7 +28,6 @@ text = "Settings"
 
 [node name="Debug" type="Button" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2
-toggle_mode = true
 text = "Debug"
 
 [node name="Quit" type="Button" parent="PanelContainer/VBoxContainer"]

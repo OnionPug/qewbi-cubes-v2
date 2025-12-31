@@ -1,6 +1,4 @@
-[gd_scene load_steps=2 format=3 uid="uid://d24ydit2xxbyv"]
-
-[ext_resource type="Script" uid="uid://c23a4rb5j52fj" path="res://Scripts/UI/debug.gd" id="1_5sp44"]
+[gd_scene format=3 uid="uid://d24ydit2xxbyv"]
 
 [node name="Debug" type="CenterContainer"]
 anchors_preset = 2
@@ -9,7 +7,6 @@ anchor_bottom = 1.0
 offset_top = -40.0
 offset_right = 50.0
 grow_vertical = 0
-script = ExtResource("1_5sp44")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 2
