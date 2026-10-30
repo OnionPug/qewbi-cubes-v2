@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://b7ckpx0q7r58o"]
+
+[node name="Title Screen" type="Node2D"]
+
+[node name="Play" type="Button" parent="."]
+offset_left = 544.0
+offset_top = 248.0
+offset_right = 632.0
+offset_bottom = 311.0
+theme_override_font_sizes/font_size = 40
+text = "Play
+"
+
+[node name="New" type="Button" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 489.0
+offset_top = 335.0
+offset_right = 708.0
+offset_bottom = 398.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 40
+text = "New Game
+"
+icon_alignment = 1
+
+[node name="Quit" type="Button" parent="."]
+offset_left = 544.0
+offset_top = 424.0
+offset_right = 636.0
+offset_bottom = 487.0
+theme_override_font_sizes/font_size = 40
+text = "Quit
+"

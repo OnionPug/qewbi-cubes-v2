@@ -5,11 +5,11 @@
 [ext_resource type="Script" uid="uid://qmko58kjn05k" path="res://Scripts/game.gd" id="1_vef74"]
 [ext_resource type="Script" uid="uid://d2j3cis21yw7e" path="res://Scripts/UI/ui.gd" id="2_e2o6t"]
 [ext_resource type="PackedScene" uid="uid://6mf2bl4k454k" path="res://Scenes/UI/menu.tscn" id="3_feb5d"]
+[ext_resource type="PackedScene" uid="uid://dj6ypych78oud" path="res://Scenes/Entity/gacy.tscn" id="3_hve3p"]
 [ext_resource type="Script" uid="uid://v6hwxut83j8e" path="res://Scripts/UI/healthbar.gd" id="3_ryrav"]
 [ext_resource type="Script" uid="uid://bt7nspo24utyc" path="res://Scripts/UI/manabar.gd" id="4_eow3j"]
 [ext_resource type="PackedScene" uid="uid://c64o5n1vh8y4h" path="res://Scenes/UI/settings.tscn" id="4_fc0e3"]
 [ext_resource type="PackedScene" uid="uid://d24ydit2xxbyv" path="res://Scenes/UI/debug.tscn" id="5_7jktm"]
-[ext_resource type="PackedScene" uid="uid://71loe7idyb5l" path="res://Scenes/UI/dialogue_player.tscn" id="5_hve3p"]
 
 [node name="Game" type="Node2D"]
 y_sort_enabled = true
@@ -21,6 +21,10 @@ y_sort_enabled = true
 
 [node name="Apartment" parent="World" instance=ExtResource("1_j5wjh")]
 
+[node name="Gacy" parent="World" instance=ExtResource("3_hve3p")]
+position = Vector2(694, 74)
+text = Array[String](["yo.", "hello.", "Persona 5", "oh ok"])
+
 [node name="Player" type="Node2D" parent="."]
 y_sort_enabled = true
 
@@ -28,13 +32,12 @@ y_sort_enabled = true
 position = Vector2(5, 249)
 
 [node name="Camera" type="Camera2D" parent="Player/Player"]
+visible = false
 position = Vector2(0, -80)
 position_smoothing_enabled = true
 
 [node name="UI" type="CanvasLayer" parent="."]
 script = ExtResource("2_e2o6t")
-
-[node name="DialoguePlayer" parent="UI" instance=ExtResource("5_hve3p")]
 
 [node name="Healthbar" type="ProgressBar" parent="UI"]
 offset_right = 363.0

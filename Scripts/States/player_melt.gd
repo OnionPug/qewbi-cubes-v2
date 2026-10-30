@@ -6,7 +6,8 @@ var direction : Vector2
 var struggle_power = 1
 var struggle_threshold = 200
 var struggle = 0
-
+var struggle_cost = 1
+var attack_cost = 20
 
 #Sprite - idle is a puddle, moving is a slimegirl. 
 #Qewbi collapses into a puddle when not moving, disabling her hitbox.
@@ -49,6 +50,10 @@ func physics_update(delta):
 			owner.velocity = Vector2(0,0)
 	elif owner.velocity.length() >= speedmult*owner.mana:
 		owner.velocity = (owner.velocity*speedmult*owner.mana)/owner.velocity.length()
+	elif $"../../Cooldown".time_left == 0:
+		owner.mana -= struggle_cost
+		$"../../Cooldown".start(0.2)
+	
 	
 	owner.move_and_slide()
 	
@@ -78,9 +83,9 @@ func fire(input):
 		#shooting
 	if $"../../Cooldown".time_left == 0 and input:
 		$"../../Cooldown".start(0.2)
-		if owner.mana > 0:
+		if owner.mana > attack_cost:
 			attack() #emerald splash!!!
-			owner.mana -= 20
+			owner.mana -= attack_cost
 	elif not input:
 			$"../../Regen".start(0.2)
 

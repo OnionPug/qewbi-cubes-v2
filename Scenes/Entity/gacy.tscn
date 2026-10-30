@@ -1,0 +1,61 @@
+[gd_scene load_steps=4 format=3 uid="uid://dj6ypych78oud"]
+
+[ext_resource type="Script" uid="uid://bfdcx0mpmva8c" path="res://Scripts/Entity/gacy.gd" id="1_t20pq"]
+[ext_resource type="Texture2D" uid="uid://ni7w6i2mat74" path="res://Assets/Gacy Sprite.png" id="2_x8lt1"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ttffm"]
+radius = 43.0813
+
+[node name="Gacy" type="Area2D"]
+script = ExtResource("1_t20pq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_ttffm")
+
+[node name="Marker" type="Sprite2D" parent="."]
+position = Vector2(0, -24)
+scale = Vector2(0.133715, 0.133715)
+texture = ExtResource("2_x8lt1")
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="background" type="ColorRect" parent="CanvasLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -576.0
+offset_top = 124.0
+offset_right = 576.0
+offset_bottom = 324.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.14, 0.14, 0.14, 0.705882)
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+offset_left = 32.0
+offset_top = 472.0
+offset_right = 526.0
+offset_bottom = 561.0
+scale = Vector2(1.70193, 1.70193)
+text = "Buh
+"
+autowrap_mode = 2
+
+[node name="continue" type="Label" parent="CanvasLayer"]
+visible = false
+offset_left = 944.0
+offset_top = 608.0
+offset_right = 1109.0
+offset_bottom = 636.0
+scale = Vector2(1.26804, 1.26804)
+text = "(press E to continue)"
+autowrap_mode = 2
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
+[connection signal="gui_input" from="CanvasLayer/background" to="." method="_on_background_gui_input"]

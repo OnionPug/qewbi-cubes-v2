@@ -1,11 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://6mf2bl4k454k"]
-
-[ext_resource type="Script" uid="uid://c7gduumj4wl42" path="res://Scripts/UI/menu.gd" id="1_1rerr"]
+[gd_scene format=3 uid="uid://6mf2bl4k454k"]
 
 [node name="Menu" type="CenterContainer"]
 offset_right = 70.0
 offset_bottom = 163.0
-script = ExtResource("1_1rerr")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 2
@@ -30,9 +27,15 @@ text = "Settings"
 layout_mode = 2
 text = "Debug"
 
+[node name="Load" type="Button" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "Load
+"
+
 [node name="Quit" type="Button" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2
-text = "Quit"
+text = "Save/
+Quit"
 
 [connection signal="pressed" from="PanelContainer/VBoxContainer/Resume" to="." method="_on_resume_pressed"]
 [connection signal="pressed" from="PanelContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]

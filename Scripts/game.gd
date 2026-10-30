@@ -3,22 +3,21 @@ extends Node2D
 
 
 #make signals to connect the world & player to the UI
-
-#recieve signals from marker - what dialogue to play
-#DONT DO THIS, ITS NOT WORTH IT - recieve signals from world - what characters to render
+#move this from ready(): to an activated function once the menu's up and running
+#should activate only after Play is pressed
 func _ready():
 	connect_world()
+	$UI.load_game()
 
-func play_dialogue():
-	pass
+
 
 func connect_world():
+	#take the currently active world - when it exits, connect the next world up to do the same
 	$World.get_child(0).tree_exited.connect(connect_world)
+	#if nothing exists, end function
 	if get_tree() == null:
 		return
-	for area in get_tree().get_nodes_in_group("Dialogue"):
-		area.dialogue_active.connect($UI/DialoguePlayer.play_dialogue)
-		print(area)
+
 
 
 

@@ -1,21 +1,21 @@
 [gd_scene load_steps=4 format=3 uid="uid://bcm7vvem04tjn"]
 
-[ext_resource type="Texture2D" uid="uid://bf31ergba1ima" path="res://Assets/Circle.png" id="1_jwujf"]
-[ext_resource type="Script" uid="uid://dv02q537qoud1" path="res://Scripts/Entity/dialogue_area.gd" id="1_mvcpl"]
+[ext_resource type="Script" uid="uid://dv02q537qoud1" path="res://Scripts/Entity/dialogue_area (ABANDONED).gd" id="1_plmsy"]
+[ext_resource type="Texture2D" uid="uid://bf31ergba1ima" path="res://Assets/Circle.png" id="2_n84nj"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_prtje"]
 radius = 32.0156
 
 [node name="Dialogue" type="Area2D" groups=["Dialogue"]]
 collision_layer = 0
-script = ExtResource("1_mvcpl")
+script = ExtResource("1_plmsy")
 import_dialogue = Array[String](["Qewbi:Hello!:true", "Gacy:gay.:false", "Qewbi:WHAT THE HELL.:false"])
 
 [node name="Circle" type="Sprite2D" parent="."]
 position = Vector2(-3.55271e-15, 0)
 rotation = 3.14159
 scale = Vector2(0.0550981, 0.0550981)
-texture = ExtResource("1_jwujf")
+texture = ExtResource("2_n84nj")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_prtje")

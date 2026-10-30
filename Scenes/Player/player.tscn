@@ -468,7 +468,7 @@ animations = [{
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_tugb3"]
 
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
-collision_mask = 65153
+collision_mask = 65152
 script = ExtResource("1_uvnfx")
 
 [node name="Pivot" type="Marker2D" parent="."]
@@ -488,7 +488,7 @@ color = Color(1, 0.294118, 1, 0.0941176)
 position = Vector2(0, 3.75)
 scale = Vector2(0.35, 0.35)
 sprite_frames = SubResource("SpriteFrames_jhyir")
-animation = &"dizzyrun"
+animation = &"freeze"
 autoplay = "idle"
 offset = Vector2(0, -325)
 

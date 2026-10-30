@@ -706,10 +706,13 @@ libraries = {
 }
 autoplay = "Idle"
 
+[node name="Timer" type="Timer" parent="."]
+
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 visible = false
 
 [node name="Sprite" type="Node2D" parent="CanvasLayer"]
+process_mode = 4
 
 [node name="Body" type="AnimatedSprite2D" parent="CanvasLayer/Sprite"]
 position = Vector2(1048.59, 767.682)
@@ -750,5 +753,16 @@ scale = Vector2(1.70193, 1.70193)
 text = "Looks like no one's around..."
 autowrap_mode = 2
 
+[node name="continue" type="Label" parent="CanvasLayer"]
+visible = false
+offset_left = 944.0
+offset_top = 608.0
+offset_right = 1109.0
+offset_bottom = 636.0
+scale = Vector2(1.26804, 1.26804)
+text = "(press E to continue)"
+autowrap_mode = 2
+
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]
+[connection signal="gui_input" from="CanvasLayer/background" to="." method="_on_background_gui_input"]

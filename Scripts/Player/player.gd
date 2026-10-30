@@ -1,5 +1,16 @@
 extends CharacterBody2D
 
+#save the obtaining progress of certain keys
+#progress point given - extra effect of holding
+var save_dict : Dictionary = {
+	"persona" : false, #exit tutorial - no special effect
+	"flat_key" : false, #end of construction site - flat at will
+	"headless_key" : false, #end of obstacle course - headless at will
+	"freeze_key" : false, #end of ice caves - 
+	"melt_key" : false, #end of bakery - melt at will
+	"dizzy_key" : false, #end of game - revive at will
+}
+
 var health = 5:
 	set(value):
 		if value < 0:
@@ -12,7 +23,7 @@ var mana = 100: # bar used to tank hits and to cast magic
 		elif value > 100:
 			value = 100
 		mana = value
-
+var regen_rate = 2.5
 
 var mouse_input : bool:
 	set(value):
@@ -39,23 +50,22 @@ func _process(_delta: float) -> void:
 	#regeneration
 	if $Regen.time_left == 0 and $Cooldown.time_left == 0 and mana < 100:
 		$Regen.start(0.05)
-		mana += 2.5
+		mana += regen_rate
 		
 	if mouse_input and can_attack:
 		$"State Machine".current_state.fire(true)
-
-		
 
 func _physics_process(_delta: float) -> void:
 	$Pivot.rotation = $Pivot.global_position.direction_to(get_global_mouse_position()).angle()
 
 
 
-func _unhandled_input(event: InputEvent) -> void:
+func _unhandled_input(event: InputEvent) -> void: 
+	#if the input hasn't been eaten by UI, send to player for gameplay
 	if event.is_action_pressed("mouse1"):
 		mouse_input = true
 	elif event.is_action_released("mouse1"):
 		mouse_input = false
-		
-	
-		
+
+func save():
+	return save_dict

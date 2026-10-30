@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=4 uid="uid://bu16but82xbyu"]
+[gd_scene load_steps=14 format=4 uid="uid://bu16but82xbyu"]
 
 [ext_resource type="Script" uid="uid://mbwvh6unt6s0" path="res://Scripts/Worlds/apartment.gd" id="1_7xocf"]
 [ext_resource type="Texture2D" uid="uid://qk8g64j2nwcv" path="res://Assets/Tilesets/Apartment_tileset.png" id="1_xd5na"]
@@ -8,7 +8,8 @@
 [ext_resource type="PackedScene" uid="uid://fm05jlp1ept2" path="res://Scenes/Entity/diary.tscn" id="5_a8flc"]
 [ext_resource type="PackedScene" uid="uid://daicuraw5yap6" path="res://Scenes/Entity/dialoguemarker.tscn" id="6_wilsu"]
 [ext_resource type="PackedScene" uid="uid://bpbem5k6febai" path="res://Scenes/Enemy/cube.tscn" id="8_7xocf"]
-[ext_resource type="PackedScene" uid="uid://bcm7vvem04tjn" path="res://Scenes/Entity/dialogue.tscn" id="8_56l3e"]
+[ext_resource type="PackedScene" uid="uid://bnat1o1gx33na" path="res://Scenes/Entity/collectible.tscn" id="9_7xocf"]
+[ext_resource type="Texture2D" uid="uid://8r5aasyhxqa7" path="res://Assets/persona.jpg" id="10_6514c"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8alme"]
 texture = ExtResource("1_xd5na")
@@ -417,46 +418,48 @@ position = Vector2(-31, -205)
 
 [node name="PistonDialogue" parent="Info" instance=ExtResource("6_wilsu")]
 position = Vector2(-340, 1804)
-text = "What an... evil and intimidating piston..."
+text = Array[String](["What an... evil and intimidating piston..."])
 
-[node name="Info1" parent="Info" instance=ExtResource("6_wilsu")]
+[node name="Controls1" parent="Info" instance=ExtResource("6_wilsu")]
 position = Vector2(169, 2)
-text = "Controls::nPress [WASD] to move.:nPress [LMB] to shoot.:nPress [Esc] to access the menu."
+text = Array[String](["Controls::nPress [WASD] to move.:nPress [LMB] to shoot.:nPress [Esc] to access the menu."])
 
-[node name="Info2" parent="Info" instance=ExtResource("6_wilsu")]
+[node name="Controls2" parent="Info" instance=ExtResource("6_wilsu")]
 position = Vector2(289, 2)
-text = "Continued::nPress [+] and [-] to zoom in and out, respectively.:nThanks for dropping by!"
+text = Array[String](["Continued::nPress [+] and [-] to zoom in and out, respectively.:nPress E or click on dialogue boxes to advance them.:nThanks for dropping by!"])
 
-[node name="Info3" parent="Info" instance=ExtResource("6_wilsu")]
+[node name="Flat1" parent="Info" instance=ExtResource("6_wilsu")]
 position = Vector2(-511, 778)
-text = "This gap's too thin to squeeze through normally..."
+text = Array[String](["This gap's too thin to squeeze through normally..."])
 
-[node name="Info4" parent="Info" instance=ExtResource("6_wilsu")]
+[node name="Flat2" parent="Info" instance=ExtResource("6_wilsu")]
 position = Vector2(-647, 1021)
-text = "Recover from being flattened by buttonmashing!"
+text = Array[String](["Recover from being flattened by buttonmashing!"])
 
-[node name="Info5" parent="Info" instance=ExtResource("6_wilsu")]
+[node name="Freeze" parent="Info" instance=ExtResource("6_wilsu")]
 position = Vector2(554, 1792)
-text = "Recover from being frozen by buttonmashing - :nor get hit by a melting attack!"
+text = Array[String](["Recover from being frozen by buttonmashing - :nor get hit by a melting attack!"])
 
-[node name="Info6" parent="Info" instance=ExtResource("6_wilsu")]
+[node name="Melt" parent="Info" instance=ExtResource("6_wilsu")]
 position = Vector2(152, 1586)
-text = "Recover from melting by standing still -:nor get hit by a freezing attack!"
+text = Array[String](["Recover from melting by standing still -:nor get hit by a freezing attack!"])
 
-[node name="Info7" parent="Info" instance=ExtResource("6_wilsu")]
+[node name="Headless" parent="Info" instance=ExtResource("6_wilsu")]
 position = Vector2(-82, 1287)
-text = "Recover from losing your head by... well, collecting your head."
+text = Array[String](["Recover from losing your head by... well, collecting your head."])
+
+[node name="LongDialogue" parent="Info" instance=ExtResource("6_wilsu")]
+position = Vector2(342, 380)
+text = Array[String](["Ok what if we...", "Made a really long...", "And drawn out...", "Dialogue box.", "Just to test, :nyou know?"])
 
 [node name="Bossfight" type="Node2D" parent="."]
 y_sort_enabled = true
 
 [node name="Info8" parent="Bossfight" instance=ExtResource("6_wilsu")]
 position = Vector2(1082, 1128)
-text = "I'm getting a strange premonition of danger..."
 
 [node name="Info9" parent="Bossfight" instance=ExtResource("6_wilsu")]
 position = Vector2(1249, 1118)
-text = "..."
 
 [node name="Entry" type="Area2D" parent="Bossfight"]
 position = Vector2(1281, 1114)
@@ -476,8 +479,13 @@ scale = Vector2(3.25749, 3.25749)
 speed = 5
 health = 5
 
-[node name="Dialogue" parent="." instance=ExtResource("8_56l3e")]
-position = Vector2(264, 78)
+[node name="Persona" parent="Bossfight" instance=ExtResource("9_7xocf")]
+position = Vector2(554, 251)
+
+[node name="Sprite2D" parent="Bossfight/Persona" index="1"]
+texture = ExtResource("10_6514c")
 
 [connection signal="body_entered" from="Bossfight/Entry" to="." method="_on_entry_body_entered"]
 [connection signal="tree_exiting" from="Bossfight/Cube" to="." method="_on_cube_death"]
+
+[editable path="Bossfight/Persona"]

@@ -30,5 +30,8 @@ func toggle(node : Node2D, mode : bool):
 
 
 func _on_cube_death() -> void:
+	#move persona to bossfight death
+	if $Bossfight/Persona:
+		$Bossfight/Persona.position = $Bossfight/Cube.position
 	toggle($Bossfight/FlatGate2, false)
 	

@@ -1,7 +1,6 @@
 extends State
 @export var speed : int
 var direction : Vector2
-var mouse_direction : Vector2
 
 func enter():
 	$"../../Area2D".set_collision_mask_value(1, false)
@@ -48,10 +47,17 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 		if child.name == "State Machine":
 			bodyStateMachine = child
 			break
-	#head can only be collected if no other status conditions have been applied
-	if body.name == "Player" and bodyStateMachine.current_state == bodyStateMachine.states["headless"]:
-		owner.queue_free()
-		bodyStateMachine.on_state_transition(bodyStateMachine.states["headless"], "normal", true)
-		if get_node_or_null("../../Camera"): 
-			$"../../Camera".global_position = body.global_position
-			$"../../Camera".reparent(body)
+	#making sure body is player
+	if body.name == "Player":
+		#head can only be collected if no other status conditions have been applied
+		if bodyStateMachine.current_state == bodyStateMachine.states["headless"] and body.has_method("take_damage"):
+			owner.queue_free()
+			body.take_damage(100, 0, "normal")
+			body.mana = 50
+			if get_node_or_null("../../Camera"): 
+				$"../../Camera".global_position = body.global_position
+				$"../../Camera".reparent(body)
+			#bodyStateMachine.on_state_transition(bodyStateMachine.states["headless"], "normal", true)
+		#head can flatten body if it is already flat
+		if bodyStateMachine.current_state == bodyStateMachine.states["flat"] and body.has_method("take_damage"):
+			body.take_damage(100, 0, "flat")

@@ -1,3 +1,17 @@
-[gd_scene format=3 uid="uid://bnat1o1gx33na"]
+[gd_scene load_steps=3 format=3 uid="uid://bnat1o1gx33na"]
+
+[ext_resource type="Script" uid="uid://d3exi83cixlc1" path="res://Scenes/Entity/collectible.gd" id="1_hw5q2"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_l0mx0"]
 
 [node name="Collectible" type="Area2D"]
+script = ExtResource("1_hw5q2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(2.92007, 2.92007)
+shape = SubResource("CircleShape2D_l0mx0")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.053529, 0.053529)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
